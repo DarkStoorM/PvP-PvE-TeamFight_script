@@ -4,27 +4,34 @@ class Fight {
 	// Let's make our Team arrays first
 	public $team1 = array();
 	public $team2 = array();
+	
+	// These are temporary properties to hold our teams passed to the class
 	public $temp_alpha = array();
 	public $temp_beta = array();
+	
 	/***
 		We  have to define max time for a fight.
-		Let's say it will be like... 600 seconds. Since it's a boss fight, and the statistics are higher,
+		Let's say it will be like... 600 seconds. Everything depends on your character statistics.
+		Since it's a boss fight, and the statistics are higher,
 		we will make it a bit longer.
 		
 		We will also handle the time_up case, to "exhaust" players.
 		The reason of it is to avoid endless loop (if it's possible).
 	***/
-	public $time_limit = 2000;
 	
-	public $condition = "";
+	// The time limit of every fight - can be set in the index.php
+	public $time_limit = null;
 	
 	public function __construct($alpha, $beta) {
+		// Store the passed teams in temporary properties.
 		$this->temp_alpha = $alpha;
 		$this->temp_beta = $beta;
 		
+		// Build up a team from given player list.
 		$this->BuildTeam();
 	}
 	
+	// Team Building method
 	public function BuildTeam() {
 		/***
 			Our first team
@@ -45,7 +52,7 @@ class Fight {
 				$this -> team1[] = new Player($alpha);
 			}
 		}
-
+		
 		foreach($this->temp_beta as $beta) {
 			if(is_array($beta)) {
 				foreach($beta as $member) {
@@ -57,11 +64,15 @@ class Fight {
 		}
 	}
 	
+	// The method to start the actual fight
 	public function StartFight() {
+		// Just a shortcut
 		$team1 = $this->team1;
 		$team2 = $this->team2;
 		
 		while(!empty($team1) || !empty($team2)) {
+			// We have to check the match conditions and also check who have won.
+			//  The loop breaks if the condition was changed (and it's changed upon winning)
 			$condition = check_teams($team1, $team2);
 			if(!empty($condition)) { break; }
 			
@@ -79,6 +90,12 @@ class Fight {
 
 			// Now we have to loop through our array. We will use switch() for methods
 			for($i=1; $i <= $this ->time_limit; $i++) {
+				/***
+					I know it may be weird that the time limit is set, and the fight ends upon the limit,
+					and it resets after a defeat, but let's say, that the opponent is recovering from the battle
+					and is ready for his next fight :P
+				***/
+				
 				if(!empty($player_turns[$i])){
 					switch($i) {
 						// We are checking what type of turn we have in our array key
@@ -145,6 +162,18 @@ class Fight {
 					array_shift($team1);
 				}
 			}
+		}
+		
+		// The optional output which controls the match conditions
+		if($condition == "first") {
+			fight_log("Team Alpha wins.");
+		} elseif($condition == "second") {
+			fight_log("Team Beta wins.");
+		} elseif($condition == "draw") {
+			fight_log("The match has ended with a draw.");
+		} else {
+			// This is the case when something is wrong with the built teams
+			fight_log("<b>Some bad stuff has happened.</b>");
 		}
 	}
 }
