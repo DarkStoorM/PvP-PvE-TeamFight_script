@@ -1,8 +1,13 @@
 <?php
-error_reporting(E_ALL);
 /***
 	This is a re-worked PvP/PvE script
 	for handling team fights instead of 1v1s
+	
+	Instructions:
+		- Start from this file
+		- Go to the team_builder.php, read the important information about team building
+			^this is where you build up the teams.
+		- Go to the Fight.php to see how
 ***/
 
 // We will define a global, which will tell us whether to use the fight log or not.
@@ -35,6 +40,9 @@ $beta_team = array($member4);
 
 // We are creating a new instance of our Fight class and passing the both team arrays as parameters
 $fight = new Fight($alpha_team, $beta_team);
+
+// Let's set the time limit for every fight
+$fight->time_limit = 1200;
 
 // This is the method which will start the fight. Use it whenever you are ready.
 $fight->StartFight();
