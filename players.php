@@ -1,5 +1,7 @@
 <?php
 
+// This is the output fight log. It outputs the given message if the global is set to TRUE.
+// The fight log can be changed into file system in this function without destroying the code.
 function fight_log($msg) {
 	if(pvp_fight_log == true) {
 		echo $msg;
@@ -84,10 +86,12 @@ class Player {
 				fight_log($this->Name." deals ");
 			}
 			
-			// Now we have to decrease the damage because of the Defense
-			// 1 DEF point decreases damage by 0.0125%
-			// This "formula" really depends on your game mechanics.
-			// IT IS NOT RECOMMENDED TO USE unless you are sure about your game mechanics and estimated total statistics
+			/***
+				Now we have to decrease the damage because of the Defense
+				1 DEF point decreases damage by 0.0125%. This "formula" depends on your game mechanics.
+				IT IS NOT RECOMMENDED TO USE unless you are sure about your game mechanics,
+				and estimated total statistics.
+			***/
 			$penalty = round(($damage * ($player->Defense * 0.0125))/100);
 			
 			// Decrease the player damage
