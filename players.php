@@ -88,7 +88,7 @@ class Player {
 			
 			/***
 				Now we have to decrease the damage because of the Defense
-				1 DEF point decreases damage by 0.0125%. This "formula" depends on your game mechanics.
+				1 DEF point decreases damage by 1.25%. This "formula" depends on your game mechanics.
 				IT IS NOT RECOMMENDED TO USE unless you are sure about your game mechanics,
 				and estimated total statistics.
 			***/
