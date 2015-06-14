@@ -3,7 +3,6 @@
 // explained in index.php
 
 // I will build a random team in this place
-
 class PlayerInfo {
 	public $Name = null;
 	public $HP = null;
@@ -59,6 +58,8 @@ class PlayerInfo {
 	
 	But this will need some modifications of the team building code.
 	The rest is explained in the index.php, you can return to that file
+	
+	THIS IS ONLY AN EXAMPLE!
 ***/
 
 $member1 = new PlayerInfo(array(
@@ -136,7 +137,9 @@ $my_team_list = array(
 
 // our example team 2
 $member4 = array();
-	
+
+// This loop is an alternative version of building a team.
+// !!!IMPORTANT - should be removed if not used.
 foreach($my_team_list as $member) {
 	$member4[] = new PlayerInfo(array(
 		"Name" => $member["Name"],
