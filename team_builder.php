@@ -42,14 +42,14 @@ class PlayerInfo {
 	
 	foreach($my_team_list as $member) {
 		$members1[] = new PlayerInfo(array(
-			"Name" => $member->Name,
-			"HP" => $member->HP,
-			"MinDMG" => $member->MinDMG,
-			"MaxDMG" => $member->MaxDMG,
-			"CritChance" => $member->CritChance,
-			"Defense" => $member->Defense,
-			"Dodge" => $member->Dodge,
-			"AttackSpeed" => $member->AttackSpeed
+			"Name" => $member["Name"],
+			"HP" => $member["HP"],
+			"MinDMG" => $member["MinDMG"],
+			"MaxDMG" => $member["MaxDMG"],
+			"CritChance" => $member["CritChance"],
+			"Defense" => $member["Defense"],
+			"Dodge" => $member["Dodge"],
+			"AttackSpeed" => $member["AttackSpeed"]
 		));
 	}
 	
